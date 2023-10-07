@@ -28,22 +28,34 @@ struct ContentView: View {
             Color.black
                 .edgesIgnoringSafeArea(.all)
             
-            GeometryReader(content: { geometry in
-                VStack {
-                    Text("0 - 1000")
-                        .foregroundStyle(.white)
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(.white)
-                            .opacity(0.3)
-                            .frame(height: 5)
+            ZStack {
+                //Color.yellow
+                GeometryReader(content: { geometry in
+                    VStack {
+                        Text("0 - 1000")
+                            .foregroundStyle(.white)
                         
+                        ZStack(alignment: .leading) {
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundColor(.white)
+                                .frame(height: 5)
+                                .padding(.horizontal, 10)
+                            
+                            Rectangle()
+                                .foregroundColor(.brown)
+                                .frame(width: widthTow - width, height: 10)
+                            
+                        }
                     }
-                }
-                .frame(width: geometry.size.width, height: 130)
-            })
-            .frame(height: 130)
+                    .frame(width: geometry.size.width, height: 130)
+                })
+                .frame(height: 130)
+                //.padding(.horizontal, 20)
+                .background(
+                    .gray, in: RoundedRectangle(cornerRadius: 20, style: .continuous)
+                )
+                .padding(.horizontal, 10)
+            }
         }
     }
 }
