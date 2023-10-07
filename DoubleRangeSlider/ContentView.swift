@@ -111,3 +111,19 @@ struct CircleDouble: View {
         )
     }
 }
+
+struct ValueBox: View {
+    var isDragging: Bool
+    var value: Int
+    var position: CGFloat
+    var xOffset: CGFloat
+
+    var body: some View {
+        
+        ZStack {
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+            
+        }
+    }
+}
+
