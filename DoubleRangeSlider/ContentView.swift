@@ -71,7 +71,7 @@ struct ContentView: View {
 
 struct CircleDouble: View {
     var isLeft: Bool
-
+    
     @Binding var isDragging: Bool
     @Binding var position: CGFloat
     @Binding var otherPosition: CGFloat
@@ -83,14 +83,24 @@ struct CircleDouble: View {
         ZStack {
             Circle()
                 .frame(width: 25, height: 25)
-                .foregroundColor(.black)
-            Circle()
-                .frame(width: 25, height: 25)
                 .foregroundColor(.white)
+            Circle()
+                .frame(width: 20, height: 20)
+                .foregroundColor(.black)
         }
+        .offset(x: position + (isLeft ? 0 : -5))
+        .gesture(
+            DragGesture()
+                .onChanged({ value in
+                    withAnimation {
+                        isDragging = true
+                    } 
+                    if isLeft {
+                        position = min(max(value.location.x, 0), otherPosition)
+                    } else {
+                        position = min(max(value.location.x, otherPosition), limit)
+                    }
+                })
+        )
     }
 }
-//
-//#Preview {
-//    CircleDouble()
-//}
