@@ -22,6 +22,13 @@ struct ContentView: View {
     @State var isDLeft = false
     @State var isDRight = false
     
+    var lowerValue: Int {
+        Int(map(value: width, from: 0...totalScreen, to: 0...maxValue))
+    }
+    var upperValue: Int {
+        Int(map(value: widthTow, from: 0...totalScreen, to: 0...maxValue))
+    }
+    
     var body: some View {
         
         ZStack {
@@ -67,6 +74,8 @@ struct ContentView: View {
             }
         }
     }
+    
+    //func map(
 }
 
 #Preview {
@@ -122,8 +131,14 @@ struct ValueBox: View {
         
         ZStack {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .frame(width: 60, height: 40)
+                .foregroundStyle(isDragging ? .black : .clear)
             
+            Text("\(value)")
+                .foregroundStyle(isDragging ? .white : .clear)
         }
+        .scaleEffect(isDragging ? 1 : 0)
+        .offset(x: position + xOffset, y: isDragging ? -40 : 0)
     }
 }
 
