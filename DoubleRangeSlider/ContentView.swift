@@ -42,8 +42,9 @@ struct ContentView: View {
                                 .padding(.horizontal, 10)
                             
                             Rectangle()
-                                .foregroundColor(.brown)
+                                .foregroundColor(.black.opacity(0.7))
                                 .frame(width: widthTow - width, height: 10)
+                                .offset(x: width + 20)
                             
                             HStack(spacing: 0) {
                                 CircleDouble(isLeft: true, isDragging: $isDLeft, position: $width, otherPosition: $widthTow, limit: totalScreen)
@@ -52,6 +53,9 @@ struct ContentView: View {
                         }
                     }
                     .frame(width: geometry.size.width, height: 130)
+                    .onAppear {
+                        totalScreen = geometry.size.width - offsetValue
+                    }
                 })
                 .frame(height: 130)
                 .padding(.horizontal, 20)
@@ -78,7 +82,6 @@ struct CircleDouble: View {
     
     var limit: CGFloat
     
-    
     var body: some View {
         ZStack {
             Circle()
@@ -86,7 +89,7 @@ struct CircleDouble: View {
                 .foregroundColor(.white)
             Circle()
                 .frame(width: 20, height: 20)
-                .foregroundColor(.black)
+                .foregroundColor(.black.opacity(0.8))
         }
         .offset(x: position + (isLeft ? 0 : -5))
         .gesture(
@@ -94,11 +97,15 @@ struct CircleDouble: View {
                 .onChanged({ value in
                     withAnimation {
                         isDragging = true
-                    } 
+                    }
                     if isLeft {
                         position = min(max(value.location.x, 0), otherPosition)
                     } else {
                         position = min(max(value.location.x, otherPosition), limit)
+                    }
+                }).onEnded({ value in
+                    withAnimation {
+                        isDragging = false
                     }
                 })
         )
