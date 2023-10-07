@@ -1,9 +1,11 @@
+//  /*
 //
-//  DoubleRangeSliderApp.swift
-//  DoubleRangeSlider
+//  Project: DoubleRangeSliderApp
+//  File: ContentView.swift
+//  Created by: Elaidzha Shchukin
+//  Date: 07.10.2023
 //
-//  Created by Elaidzha Shchukin on 07.10.2023.
-//
+//  */
 
 import SwiftUI
 
