@@ -19,13 +19,13 @@ struct ContentView: View {
     
     let maxValue: CGFloat = 1000
     
-    @State var isLeft = false
-    @State var isRight = false
+    @State var isDLeft = false
+    @State var isDRight = false
     
     var body: some View {
         
         ZStack {
-            Color.black
+            Color(Color("BG"))
                 .edgesIgnoringSafeArea(.all)
             
             ZStack {
@@ -33,12 +33,13 @@ struct ContentView: View {
                 GeometryReader(content: { geometry in
                     VStack {
                         Text("0 - 1000")
+                            .font(.system(size: 20, weight: .bold, design: .serif))
                             .foregroundStyle(.white)
                         
                         ZStack(alignment: .leading) {
                             RoundedRectangle(cornerRadius: 10)
                                 .foregroundColor(.white)
-                                .frame(height: 5)
+                                .frame(height: 8)
                                 .padding(.horizontal, 10)
                             
                             Rectangle()
@@ -50,11 +51,12 @@ struct ContentView: View {
                     .frame(width: geometry.size.width, height: 130)
                 })
                 .frame(height: 130)
-                //.padding(.horizontal, 20)
+                .padding(.horizontal, 20)
                 .background(
-                    .gray, in: RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    Color("BG"), in: RoundedRectangle(cornerRadius: 20, style: .continuous)
                 )
                 .padding(.horizontal, 10)
+                .shadow(color: .black.opacity(0.5), radius: 10, x: 10, y: 10)
             }
         }
     }
@@ -63,3 +65,24 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
+struct CircleDouble: View {
+    var isLeft: Bool
+
+    @Binding var isDragging: Bool
+    @Binding var position: CGFloat
+    @Binding var otherPosition: CGFloat
+    
+    var limit: CGFloat
+    
+    
+    var body: some View {
+        ZStack {
+            Circle()
+        }
+    }
+}
+//
+//#Preview {
+//    CircleDouble()
+//}
