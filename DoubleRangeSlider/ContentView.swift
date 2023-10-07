@@ -38,7 +38,7 @@ struct ContentView: View {
             ZStack {
                 GeometryReader(content: { geometry in
                     VStack(spacing: 40) {
-                        Text("0 - 1000")
+                        Text("km \(lowerValue) km \(upperValue)")
                             .font(.system(size: 20, weight: .bold, design: .serif))
                             .foregroundStyle(.white)
                         
@@ -141,7 +141,7 @@ struct ValueBox: View {
         ZStack {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .frame(width: 60, height: 40)
-                .foregroundStyle(isDragging ? .black : .clear)
+                .foregroundStyle(isDragging ? Color("BG") : .clear)
             
             Text("km\(value)")
                 .foregroundStyle(isDragging ? .white : .clear)
