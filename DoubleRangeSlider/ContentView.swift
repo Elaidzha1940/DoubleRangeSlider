@@ -29,7 +29,6 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
             
             ZStack {
-                //Color.yellow
                 GeometryReader(content: { geometry in
                     VStack {
                         Text("0 - 1000")
@@ -46,6 +45,10 @@ struct ContentView: View {
                                 .foregroundColor(.brown)
                                 .frame(width: widthTow - width, height: 10)
                             
+                            HStack(spacing: 0) {
+                                CircleDouble(isLeft: true, isDragging: $isDLeft, position: $width, otherPosition: $widthTow, limit: totalScreen)
+                                CircleDouble(isLeft: false, isDragging: $isDRight, position: $widthTow, otherPosition: $width, limit: totalScreen)
+                            }
                         }
                     }
                     .frame(width: geometry.size.width, height: 130)
@@ -56,7 +59,7 @@ struct ContentView: View {
                     Color("BG"), in: RoundedRectangle(cornerRadius: 20, style: .continuous)
                 )
                 .padding(.horizontal, 10)
-                .shadow(color: .black.opacity(0.5), radius: 10, x: 10, y: 10)
+                .shadow(color: .black, radius: 10, x: 10, y: 10)
             }
         }
     }
@@ -79,6 +82,11 @@ struct CircleDouble: View {
     var body: some View {
         ZStack {
             Circle()
+                .frame(width: 25, height: 25)
+                .foregroundColor(.black)
+            Circle()
+                .frame(width: 25, height: 25)
+                .foregroundColor(.white)
         }
     }
 }
