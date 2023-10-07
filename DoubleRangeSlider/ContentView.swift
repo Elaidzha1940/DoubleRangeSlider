@@ -37,7 +37,7 @@ struct ContentView: View {
             
             ZStack {
                 GeometryReader(content: { geometry in
-                    VStack {
+                    VStack(spacing: 40) {
                         Text("0 - 1000")
                             .font(.system(size: 20, weight: .bold, design: .serif))
                             .foregroundStyle(.white)
@@ -57,7 +57,11 @@ struct ContentView: View {
                                 CircleDouble(isLeft: true, isDragging: $isDLeft, position: $width, otherPosition: $widthTow, limit: totalScreen)
                                 CircleDouble(isLeft: false, isDragging: $isDRight, position: $widthTow, otherPosition: $width, limit: totalScreen)
                             }
+                            
+                            ValueBox(isDragging: isDLeft, value: lowerValue, position: width, xOffset: -18)
+                            ValueBox(isDragging: isDRight, value: upperValue, position: widthTow, xOffset: -18)
                         }
+                        .offset(y: 8)
                     }
                     .frame(width: geometry.size.width, height: 130)
                     .onAppear {
@@ -75,7 +79,12 @@ struct ContentView: View {
         }
     }
     
-    //func map(
+    func map(value: CGFloat, from: ClosedRange<CGFloat>, to: ClosedRange<CGFloat>) -> CGFloat {
+        let inputRange = from.upperBound - from.lowerBound
+        guard inputRange != 0 else { return 0 }
+        let outputRange = to.upperBound - to.lowerBound
+        return (value - from.lowerBound) / inputRange * outputRange + to.lowerBound
+    }
 }
 
 #Preview {
@@ -134,7 +143,7 @@ struct ValueBox: View {
                 .frame(width: 60, height: 40)
                 .foregroundStyle(isDragging ? .black : .clear)
             
-            Text("\(value)")
+            Text("km\(value)")
                 .foregroundStyle(isDragging ? .white : .clear)
         }
         .scaleEffect(isDragging ? 1 : 0)
